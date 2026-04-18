@@ -187,18 +187,21 @@
         .hero-headline {
             width: 100%;
             display: flex;
-            justify-content: space-between;
-            align-items: baseline;
-            font-size: clamp(5rem, 15.5vw, 19rem);
+            flex-direction: column;
+            gap: 0;
             font-weight: 900;
             letter-spacing: -.04em;
             color: var(--sand);
             text-transform: lowercase;
-            line-height: .88;
             opacity: 0; transform: translateY(40px);
             animation: fadeUp 1.1s .4s cubic-bezier(.22,1,.36,1) forwards;
         }
-        .hero-headline span { display: block; }
+        .hero-headline span {
+            display: block;
+            white-space: nowrap;
+            line-height: .88;
+            font-size: 10px; /* fittext sets the real size */
+        }
 
         /* Bottom row: desc + CTAs + contacts */
         .hero-bottom {
@@ -248,7 +251,6 @@
         /* Mobile hero */
         @media (max-width: 640px) {
             #hero { padding: 2rem 1.75rem 1.75rem; }
-            .hero-headline { font-size: clamp(3.5rem, 18vw, 8rem); }
             .hero-bottom { grid-template-columns: 1fr; gap: 1.5rem; }
             .hero-desc { display: none; }
             .hero-contacts { display: none; }
@@ -257,7 +259,6 @@
             .hero-social { display: none; }
         }
         @media (max-width: 860px) {
-            .hero-headline { font-size: clamp(4rem, 13vw, 12rem); }
             .hero-bottom { grid-template-columns: 1fr auto; }
             .hero-contacts { display: none; }
             .hero-desc { display: none; }
@@ -1514,6 +1515,7 @@ function closeMenu() {
 document.getElementById('mobileClose').addEventListener('click', closeMenu);
 
 /* ── SCROLL REVEAL ── */
+const revealEls = document.querySelectorAll('.reveal, .reveal-left');
 const revealObs = new IntersectionObserver((entries) => {
     entries.forEach(e => {
         if (e.isIntersecting) {
@@ -1521,8 +1523,10 @@ const revealObs = new IntersectionObserver((entries) => {
             revealObs.unobserve(e.target);
         }
     });
-}, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
-document.querySelectorAll('.reveal, .reveal-left').forEach(el => revealObs.observe(el));
+}, { threshold: 0.05, rootMargin: '0px 0px -20px 0px' });
+revealEls.forEach(el => revealObs.observe(el));
+/* Fallback: reveal all after 2.5s in case IntersectionObserver doesn't fire */
+setTimeout(() => revealEls.forEach(el => el.classList.add('in')), 2500);
 
 /* ── PROGRESS BAR ── */
 const pFill = document.getElementById('progressFill');
@@ -1552,13 +1556,46 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
     });
 });
 
+/* ── HERO FITTEXT ── */
+function fitHeroText() {
+    const wrap = document.querySelector('.hero-headline');
+    const wrapParent = document.querySelector('.hero-headline-wrap');
+    if (!wrap || !wrapParent) return;
+    const W = wrap.clientWidth;
+    const maxH = wrapParent.clientHeight;
+    const spans = [...wrap.querySelectorAll('span')];
+
+    /* Step 1: size each word to fill width */
+    const sizes = spans.map(span => {
+        let lo = 10, hi = 700;
+        span.style.fontSize = hi + 'px';
+        while (hi - lo > 0.5) {
+            const mid = (lo + hi) / 2;
+            span.style.fontSize = mid + 'px';
+            span.scrollWidth <= W ? (lo = mid) : (hi = mid);
+        }
+        return lo;
+    });
+
+    /* Step 2: check total height and scale down if needed */
+    spans.forEach((span, i) => span.style.fontSize = sizes[i] + 'px');
+    const totalH = wrap.scrollHeight;
+    if (totalH > maxH * 0.96) {
+        const scale = (maxH * 0.96) / totalH;
+        spans.forEach((span, i) => span.style.fontSize = (sizes[i] * scale) + 'px');
+    }
+}
+document.fonts.ready.then(fitHeroText);
+window.addEventListener('load', fitHeroText);
+window.addEventListener('resize', fitHeroText);
+
 /* ── HERO PARALLAX ── */
-const heroImg = document.querySelector('.hero-img img');
+const heroImg = document.querySelector('.hero-bg img');
 if (heroImg) {
     window.addEventListener('scroll', () => {
         const scrolled = window.scrollY;
         if (scrolled < window.innerHeight) {
-            heroImg.style.transform = `scale(1) translateY(${scrolled * 0.12}px)`;
+            heroImg.style.transform = `scale(1.05) translateY(${scrolled * 0.12}px)`;
         }
     }, { passive: true });
 }
