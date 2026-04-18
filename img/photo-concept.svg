@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1067" preserveAspectRatio="xMidYMid slice">
+<defs>
+  <filter id="blur-xl" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="30"/></filter>
+  <filter id="blur-lg" x="-40%" y="-40%" width="180%" height="180%"><feGaussianBlur stdDeviation="16"/></filter>
+  <filter id="blur-md" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="8"/></filter>
+  <filter id="grain">
+    <feTurbulence type="fractalNoise" baseFrequency="0.70" numOctaves="4" stitchTiles="stitch" result="n"/>
+    <feColorMatrix type="saturate" values="0" in="n"/>
+    <feBlend in="SourceGraphic" mode="multiply"/>
+  </filter>
+  <radialGradient id="vig" cx="50%" cy="50%" r="70%">
+    <stop offset="30%" stop-color="#060302" stop-opacity="0"/>
+    <stop offset="100%" stop-color="#060302" stop-opacity="0.93"/>
+  </radialGradient>
+  <radialGradient id="glow" cx="50%" cy="48%" r="45%">
+    <stop offset="0%" stop-color="#F0A860" stop-opacity="0.8"/>
+    <stop offset="45%" stop-color="#C46028" stop-opacity="0.38"/>
+    <stop offset="100%" stop-color="#060302" stop-opacity="0"/>
+  </radialGradient>
+</defs>
+
+<rect width="800" height="1067" fill="#0F0803"/>
+
+<!-- downward dog / floor pose – body in inverted V -->
+
+<!-- legs – angled down to floor -->
+<g filter="url(#blur-xl)">
+  <!-- left leg -->
+  <ellipse cx="280" cy="760" rx="58" ry="220" fill="#B05028" opacity="0.58" transform="rotate(18 280 760)"/>
+  <!-- right leg -->
+  <ellipse cx="520" cy="750" rx="55" ry="215" fill="#A84A22" opacity="0.54" transform="rotate(-22 520 750)"/>
+  <!-- feet on mat -->
+  <ellipse cx="215" cy="930" rx="68" ry="42" fill="#180A04" opacity="0.78"/>
+  <ellipse cx="578" cy="918" rx="65" ry="40" fill="#180A04" opacity="0.72"/>
+</g>
+
+<!-- hips – peak of the V, highest point -->
+<g filter="url(#blur-lg)">
+  <ellipse cx="400" cy="520" rx="110" ry="72" fill="#C86030" opacity="0.65"/>
+  <ellipse cx="400" cy="515" rx="72"  ry="50" fill="#D88040" opacity="0.5"/>
+</g>
+
+<!-- torso angling down toward arms -->
+<g filter="url(#blur-lg)">
+  <ellipse cx="380" cy="640" rx="95"  ry="150" fill="#C06030" opacity="0.55" transform="rotate(-35 380 640)"/>
+  <ellipse cx="360" cy="640" rx="62" ry="100"  fill="#D07838" opacity="0.42" transform="rotate(-35 360 640)"/>
+</g>
+
+<!-- arms – reaching forward/down to floor -->
+<g filter="url(#blur-md)">
+  <!-- left arm -->
+  <ellipse cx="230" cy="710" rx="42" ry="160" fill="#C06030" opacity="0.6" transform="rotate(-38 230 710)"/>
+  <!-- right arm -->
+  <ellipse cx="170" cy="720" rx="38" ry="140" fill="#B05828" opacity="0.55" transform="rotate(-42 170 720)"/>
+  <!-- hands on mat -->
+  <ellipse cx="115" cy="820" rx="55" ry="38" fill="#C87038" opacity="0.5"/>
+  <ellipse cx="195" cy="830" rx="48" ry="35" fill="#C07030" opacity="0.46"/>
+</g>
+
+<!-- head hanging down between arms -->
+<g filter="url(#blur-md)">
+  <ellipse cx="175" cy="758" rx="72" ry="82" fill="#C87040" opacity="0.62" transform="rotate(-30 175 758)"/>
+  <ellipse cx="168" cy="748" rx="48" ry="56" fill="#E09868" opacity="0.44" transform="rotate(-30 168 748)"/>
+  <!-- hair hanging -->
+  <ellipse cx="145" cy="790" rx="70" ry="55" fill="#1C0E04" opacity="0.85" transform="rotate(-25 145 790)"/>
+</g>
+
+<g filter="url(#blur-xl)">
+  <ellipse cx="390" cy="560" rx="220" ry="240" fill="#E07838" opacity="0.38"/>
+  <ellipse cx="200" cy="760" rx="180" ry="160" fill="#C05E28" opacity="0.3"/>
+</g>
+
+<rect width="800" height="1067" fill="url(#glow)" opacity="0.6"/>
+<ellipse cx="400" cy="1000" rx="450" ry="90" fill="#C85D2C" opacity="0.13" filter="url(#blur-xl)"/>
+<ellipse cx="400" cy="940"  rx="300" ry="70" fill="#040302" opacity="0.7" filter="url(#blur-xl)"/>
+<rect width="800" height="1067" fill="url(#vig)"/>
+<rect width="800" height="1067" fill="#E07030" opacity="0.022" filter="url(#grain)"/>
+</svg>

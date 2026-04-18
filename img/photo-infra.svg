@@ -1,0 +1,79 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1067" preserveAspectRatio="xMidYMid slice">
+<defs>
+  <filter id="blur-xl" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="28"/></filter>
+  <filter id="blur-lg" x="-40%" y="-40%" width="180%" height="180%"><feGaussianBlur stdDeviation="15"/></filter>
+  <filter id="blur-md" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="7"/></filter>
+  <filter id="grain">
+    <feTurbulence type="fractalNoise" baseFrequency="0.72" numOctaves="4" stitchTiles="stitch" result="n"/>
+    <feColorMatrix type="saturate" values="0" in="n"/>
+    <feBlend in="SourceGraphic" mode="multiply"/>
+  </filter>
+  <radialGradient id="vig" cx="50%" cy="48%" r="70%">
+    <stop offset="28%" stop-color="#050302" stop-opacity="0"/>
+    <stop offset="100%" stop-color="#050302" stop-opacity="0.94"/>
+  </radialGradient>
+  <radialGradient id="glow" cx="52%" cy="50%" r="43%">
+    <stop offset="0%" stop-color="#EEA458" stop-opacity="0.84"/>
+    <stop offset="48%" stop-color="#C25C26" stop-opacity="0.38"/>
+    <stop offset="100%" stop-color="#050302" stop-opacity="0"/>
+  </radialGradient>
+</defs>
+
+<rect width="800" height="1067" fill="#0E0802"/>
+
+<!-- savasana / final relaxation – lying fully flat on back, side view -->
+
+<!-- mat/floor glow -->
+<ellipse cx="400" cy="870" rx="450" ry="60" fill="#C85D2C" opacity="0.14" filter="url(#blur-xl)"/>
+
+<!-- full body lying on back – long horizontal -->
+<g filter="url(#blur-xl)">
+  <ellipse cx="400" cy="720" rx="370" ry="75" fill="#B05028" opacity="0.5" transform="rotate(-1 400 720)"/>
+  <ellipse cx="400" cy="710" rx="280" ry="58" fill="#C06030" opacity="0.44"/>
+</g>
+
+<!-- torso wider section -->
+<g filter="url(#blur-lg)">
+  <ellipse cx="310" cy="700" rx="155" ry="85" fill="#C86030" opacity="0.58"/>
+  <ellipse cx="305" cy="690" rx="105" ry="60" fill="#D87840" opacity="0.46"/>
+</g>
+
+<!-- arms slightly away from body -->
+<g filter="url(#blur-lg)">
+  <!-- left arm – palm up, slightly to side -->
+  <ellipse cx="155" cy="745" rx="140" ry="38" fill="#B05028" opacity="0.55" transform="rotate(-12 155 745)"/>
+  <ellipse cx="75"  cy="770" rx="50"  ry="36" fill="#C07030" opacity="0.48"/>
+  <!-- right arm -->
+  <ellipse cx="565" cy="748" rx="135" ry="36" fill="#A84822" opacity="0.52" transform="rotate(10 565 748)"/>
+  <ellipse cx="680" cy="760" rx="48"  ry="34" fill="#B86828" opacity="0.45"/>
+</g>
+
+<!-- legs – feet slightly apart -->
+<g filter="url(#blur-xl)">
+  <ellipse cx="565" cy="740" rx="68" ry="200" fill="#A84820" opacity="0.55" transform="rotate(-5 565 740)"/>
+  <ellipse cx="635" cy="745" rx="62" ry="185" fill="#A04518" opacity="0.5" transform="rotate(3 635 745)"/>
+  <!-- feet -->
+  <ellipse cx="555" cy="915" rx="52" ry="44" fill="#1A0C04" opacity="0.75"/>
+  <ellipse cx="640" cy="920" rx="50" ry="42" fill="#180A04" opacity="0.72"/>
+</g>
+
+<!-- head on floor, face slightly upward -->
+<g filter="url(#blur-md)">
+  <ellipse cx="130" cy="675" rx="88" ry="95" fill="#C87040" opacity="0.65" transform="rotate(-5 130 675)"/>
+  <ellipse cx="135" cy="665" rx="58" ry="65" fill="#E09868" opacity="0.47"/>
+  <ellipse cx="140" cy="620" rx="52" ry="38" fill="#F0B078" opacity="0.32"/>
+  <!-- hair spread -->
+  <ellipse cx="80"  cy="672" rx="100" ry="48" fill="#1A0C04" opacity="0.85" transform="rotate(-10 80 672)"/>
+</g>
+
+<g filter="url(#blur-xl)">
+  <ellipse cx="360" cy="680" rx="240" ry="200" fill="#E07838" opacity="0.35"/>
+  <ellipse cx="140" cy="660" rx="180" ry="120" fill="#C05E28" opacity="0.3"/>
+</g>
+
+<rect width="800" height="1067" fill="url(#glow)" opacity="0.62"/>
+<ellipse cx="400" cy="960" rx="440" ry="88" fill="#C85D2C" opacity="0.12" filter="url(#blur-xl)"/>
+<ellipse cx="400" cy="900" rx="300" ry="62" fill="#030201" opacity="0.7"  filter="url(#blur-xl)"/>
+<rect width="800" height="1067" fill="url(#vig)"/>
+<rect width="800" height="1067" fill="#E07030" opacity="0.022" filter="url(#grain)"/>
+</svg>
